@@ -8,3 +8,21 @@ services:
       - ./:/var/www/html
     env_file:
       - .env
+    depends_on:
+      - rabbitmq
+    networks:
+      - app-network
+
+
+  rabbitmq:
+    image: rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+    driver: bridge

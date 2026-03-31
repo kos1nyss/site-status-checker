@@ -5,7 +5,8 @@ RUN apk update && apk add --no-cache \
     libzip-dev \
     git
 
-RUN docker-php-ext-install pdo_mysql zip
+
+RUN docker-php-ext-install pdo_mysql zip sockets
 
 WORKDIR /var/www/html
 

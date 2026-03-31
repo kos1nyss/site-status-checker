@@ -25,4 +25,19 @@ echo shell_exec('ls -la');
 require __DIR__ . '/../vendor/autoload.php';
 
 $app = new Application();
-$app->run();
+// $app->run();
+
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
+
+sleep(10);
+$connection = new AMQPStreamConnection(
+	'rabbitmq',
+	5672,
+	'softline',
+	'test',
+);
+$channel = $connection->channel();
+
+var_dump($connection);
+var_dump($channel);
