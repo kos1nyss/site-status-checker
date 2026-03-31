@@ -47,26 +47,13 @@ class Application
 
 	private function getStatus(): ?int
 	{
-		$url = 'https://lk.npf-transneft.ru/user/auth/';
+		$httpClient = new Http\HttpClient();
 
-		$ch = \curl_init($url);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return response as a string
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_exec($ch);
-
-		if (curl_errno($ch))
-		{
-			sleep(60);
-
-			return null;
-		}
-
-		$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-		curl_close($ch);
-
-		return (int)$status;
+		return
+			$httpClient
+				->get('https://lk.npf-transneft.ru/user/auth/')
+				->getStatusCode()
+			;
 	}
 
 	public function sendMail(
