@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Softline;
 
+use PhpAmqpLib\Message\AMQPMessage;
 use PHPMailer\PHPMailer\PHPMailer;
+use Softline\Message\MessageBroker;
 
 class Application
 {
@@ -12,10 +14,26 @@ class Application
 
 	public function run(): void
 	{
+		$this->runMessageBroker();
+
 		while (True)
 		{
 			$this->process();
-			sleep(10);
+		}
+	}
+
+	private function runMessageBroker(): void
+	{
+		$messageBroker = MessageBroker::getInstance();
+		$messageBroker->declareQueue('hello');
+
+		$workersDir = __DIR__ . '/../workers';
+		$workers = scandir($workersDir);
+
+		foreach ($workers as $worker)
+		{
+			$path = $workersDir . '/' . $worker;
+			exec("php $path > /dev/null 2>&1 &");
 		}
 	}
 
@@ -52,7 +70,7 @@ class Application
 		return
 			$httpClient
 				->get('https://lk.npf-transneft.ru/user/auth/')
-				->getStatusCode()
+				?->getStatusCode()
 			;
 	}
 

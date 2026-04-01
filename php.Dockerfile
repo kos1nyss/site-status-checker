@@ -16,4 +16,4 @@ RUN composer install
 
 COPY . .
 
-CMD ["sh", "-c", "php ./src/index.php"]
+CMD ["sh", "-c", "sleep 10 && php ./src/index.php"]
