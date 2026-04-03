@@ -1,6 +1,6 @@
 <?php
 
-namespace Softline\Http;
+namespace Softline\Core\Http;
 
 class HttpResponse
 {

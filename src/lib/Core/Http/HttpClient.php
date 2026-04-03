@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Softline\Http;
+namespace Softline\Core\Http;
 
 class HttpClient
 {
