@@ -3,6 +3,8 @@
 namespace Softline\Core\Mail;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use Softline\Core\Logger\Log;
+use Softline\Core\Logger\Logger;
 
 class Mail
 {
@@ -55,6 +57,9 @@ class Mail
 		string $text,
 	): bool
 	{
+		$logger = new Logger();
+		$logger->add('Попытка отправить письмо на почту: ' . $email, Log::GENERAL);
+
 		$this->mailer->addAddress($email);
 		$this->mailer->Subject = $title;
 		$this->mailer->Body = $text;
@@ -64,10 +69,15 @@ class Mail
 		}
 		catch (\Exception $exception)
 		{
-			echo 'Ошибка при отправке сообщения на почту: ' . PHP_EOL;
-			echo $exception->getMessage() . PHP_EOL;
-			echo $exception->getCode() . PHP_EOL;
-			echo $exception->getTraceAsString() . PHP_EOL;
+			$message =
+				'Ошибка при отправке сообщения на почту: ' . $email . '.' . PHP_EOL
+				. 'Подробности ошибки:' . PHP_EOL
+				. $exception->getMessage() . PHP_EOL
+				. $exception->getCode() . PHP_EOL
+				. $exception->getTraceAsString() . PHP_EOL
+			;
+
+			$logger->add($message, Log::GENERAL);
 
 			return false;
 		}

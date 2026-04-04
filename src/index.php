@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Softline\Application;
 
-require 'autoload.php';
+require 'boot.php';
 
 echo 'started' . PHP_EOL;
 

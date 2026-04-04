@@ -5,6 +5,8 @@ namespace Softline\Core\Message;
 
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use Softline\Core\Logger\Log;
+use Softline\Core\Logger\Logger;
 
 class MessageBroker
 {
@@ -42,6 +44,9 @@ class MessageBroker
 
 		$this->channel = $connection->channel();
 		$this->connection = $connection;
+
+		$logger = new Logger();
+		$logger->add('Установлено соединение с RabbitMQ.', Log::GENERAL);
 	}
 
 	public function close(): void
