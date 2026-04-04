@@ -12,7 +12,7 @@ $logger = new Logger();
 
 $callback = function (AMQPMessage $msg) use ($logger) {
 	$logger->add(
-		'Сработал обработчик сообщения по ключу ' . Log::GENERAL->value . PHP_EOL
+		'Сработал обработчик сообщения по ключу sendMail' . PHP_EOL
 		. 'Данные для обработки: ' . $msg->getBody(),
 		Log::GENERAL,
 	);
