@@ -3,7 +3,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: php.Dockerfile
+      dockerfile: docker/php.Dockerfile
     volumes:
       - ./:/var/www/html
     env_file:
