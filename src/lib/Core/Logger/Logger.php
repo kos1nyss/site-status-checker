@@ -23,7 +23,7 @@ class Logger
 
 	private function writeToFile(string $message, Log $log): void
 	{
-		$file = SRC_DIR . '/../logs/' . $log->value . '.log';
+		$file = ROOT_DIR . '/logs/' . $log->value . '.log';
 
 		$dir = dirname($file);
 		if (!is_dir($dir))
