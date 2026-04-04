@@ -25,6 +25,8 @@ $callback = function (AMQPMessage $msg) use ($logger) {
 		$data['title'],
 		$data['text'],
 	);
+
+	$msg->ack();
 };
 
 $messageConsumer = new MessageConsumer();
