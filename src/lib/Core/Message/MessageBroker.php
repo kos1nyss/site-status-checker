@@ -14,7 +14,6 @@ class MessageBroker
 	private AMQPChannel $channel;
 	private AMQPStreamConnection $connection;
 
-
 	public static function getInstance(): static
 	{
 		if (static::$instance !== null)
@@ -53,6 +52,41 @@ class MessageBroker
 	{
 		$this->getChannel()->close();
 		$this->getConnection()->close();
+	}
+
+	public function run(): void
+	{
+		$logger = new Logger();
+
+		foreach (RoutingKey::cases() as $routingKey)
+		{
+			$this->declareQueue($routingKey->value);
+			$logger->add('Очередь ' . $routingKey->value . ' задекларирована.', Log::GENERAL);
+		}
+
+		$callbacksDir = __DIR__ . '/../callback';
+		$callbacks = scandir($callbacksDir);
+
+		$mailTo = getenv('MAIL_TO');
+		$mails = explode(',', $mailTo);
+
+		foreach ($callbacks as $callback)
+		{
+			$path = $callbacksDir . '/' . $callback;
+			if (!is_file($path))
+			{
+				continue;
+			}
+
+			foreach ($mails as $index => $mail)
+			{
+				exec("php $path > /dev/null 2>&1 &");
+				$logger->add(
+					'Обработчик номер ' . $index + 1 . ' по пути ' . $path . ' запущен.',
+					Log::GENERAL,
+				);
+			}
+		}
 	}
 
 	public function declareQueue(string $queue): void
