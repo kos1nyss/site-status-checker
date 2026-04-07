@@ -4,34 +4,48 @@ namespace Softline;
 
 use PhpAmqpLib\Message\AMQPMessage;
 use Softline\Core\Logger\Log;
+use Softline\Core\Logger\Logger;
 use Softline\Core\Message\MessagePublisher;
 use Softline\Core\Message\RoutingKey;
 
 class SiteStatusChecker
 {
+	private string $url;
+
+	public function __construct(string $url)
+	{
+		$this->url = $url;
+	}
+
 	public function run(): void
 	{
 		while (True)
 		{
-			$this->process();
-			sleep(120);
+			$status = $this->iteration();
+
+			$this->isStatusNegative($status) ? sleep(300) : sleep(10);
 		}
 	}
 
-	private function process(): void
+	private function iteration(): int
 	{
-		$logger = new Core\Logger\Logger();
+		$logger = new Logger();
+		$logger->add(
+			"Началась проверка сайта $this->url.",
+			Log::INFO,
+		);
+
 		$messagePublisher = new MessagePublisher();
 
 		$mailTo = getenv('MAIL_TO');
 		$mails = explode(',', $mailTo);
 
 		$status = $this->getStatus();
-		$logger->add('Произведена проверка сайта. Обнаружено, что сайт вернул код: ' . $status, Log::GENERAL);
+		$logger->add("Произведена проверка сайта $this->url. Обнаружено, что сайт вернул код: " . $status, Log::INFO);
 
-		if (400 <= $status && $status <= 600)
+		if ($this->isStatusNegative($status))
 		{
-			$title = 'Ошибка. Портал lk.npf-transneft.ru недоступен';
+			$title = "Ошибка. Портал $this->url недоступен";
 			$text = 'Код ошибки: ' . $status;
 
 			foreach ($mails as $mail)
@@ -45,9 +59,9 @@ class SiteStatusChecker
 				$message = new AMQPMessage(json_encode($data, JSON_THROW_ON_ERROR));
 				$messagePublisher->publish($message, RoutingKey::SEND_MAIL->value);
 			}
-
-			sleep(300);
 		}
+
+		return $status;
 	}
 
 
@@ -57,8 +71,13 @@ class SiteStatusChecker
 
 		return
 			$httpClient
-				->get('https://lk.npf-transneft.ru/user/auth/')
+				->get($this->url)
 				?->getStatusCode()
 			;
+	}
+
+	private function isStatusNegative(int $status): bool
+	{
+		return 400 <= $status && $status <= 600;
 	}
 }

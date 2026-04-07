@@ -58,7 +58,7 @@ class Mail
 	): bool
 	{
 		$logger = new Logger();
-		$logger->add('Попытка отправить письмо на почту: ' . $email, Log::GENERAL);
+		$logger->add('Попытка отправить письмо на почту: ' . $email, Log::INFO);
 
 		$this->mailer->addAddress($email);
 		$this->mailer->Subject = $title;
@@ -77,7 +77,7 @@ class Mail
 				. $exception->getTraceAsString() . PHP_EOL
 			;
 
-			$logger->add($message, Log::GENERAL);
+			$logger->add($message, Log::ERROR);
 
 			return false;
 		}

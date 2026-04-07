@@ -45,7 +45,7 @@ class MessageBroker
 		$this->connection = $connection;
 
 		$logger = new Logger();
-		$logger->add('Установлено соединение с RabbitMQ.', Log::GENERAL);
+		$logger->add('Установлено соединение с RabbitMQ.', Log::INFO);
 	}
 
 	public function close(): void
@@ -61,10 +61,10 @@ class MessageBroker
 		foreach (RoutingKey::cases() as $routingKey)
 		{
 			$this->declareQueue($routingKey->value);
-			$logger->add('Очередь ' . $routingKey->value . ' задекларирована.', Log::GENERAL);
+			$logger->add('Очередь ' . $routingKey->value . ' задекларирована.', Log::INFO);
 		}
 
-		$callbacksDir = __DIR__ . '/../callback';
+		$callbacksDir = ROOT_DIR . '/src/callback';
 		$callbacks = scandir($callbacksDir);
 
 		$mailTo = getenv('MAIL_TO');
@@ -83,7 +83,7 @@ class MessageBroker
 				exec("php $path > /dev/null 2>&1 &");
 				$logger->add(
 					'Обработчик номер ' . $index + 1 . ' по пути ' . $path . ' запущен.',
-					Log::GENERAL,
+					Log::INFO,
 				);
 			}
 		}

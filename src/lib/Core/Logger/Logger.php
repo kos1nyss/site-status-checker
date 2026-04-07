@@ -10,6 +10,11 @@ class Logger
 	{
 		$message = $this->prepareMessage($message);
 
+		if ($log !== Log::GENERAL)
+		{
+			$this->writeToFile($message, Log::GENERAL);
+		}
+
 		$this->writeToFile($message, $log);
 	}
 
@@ -28,9 +33,16 @@ class Logger
 		$dir = dirname($file);
 		if (!is_dir($dir))
 		{
-			mkdir($dir, 0777, true);
+			mkdir($dir, recursive: true);
+			chmod($dir, 0777);
 		}
 
+		$isFileExists = file_exists($file);
 		file_put_contents($file, $message, FILE_APPEND | LOCK_EX);
+
+		if (!$isFileExists)
+		{
+			chmod($file, 0777);
+		}
 	}
 }
