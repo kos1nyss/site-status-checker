@@ -28,7 +28,9 @@ class Logger
 
 	private function writeToFile(string $message, Log $log): void
 	{
-		$file = ROOT_DIR . '/logs/' . $log->value . '.log';
+		$now = DateTime::createFromFormat('U.u', microtime(true));
+		$formattedDate = $now->format('d.m.Y');
+		$file = ROOT_DIR . '/logs/' . $formattedDate . '/' . $log->value . '.log';
 
 		$dir = dirname($file);
 		if (!is_dir($dir))
