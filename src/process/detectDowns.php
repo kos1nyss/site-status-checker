@@ -2,7 +2,7 @@
 
 use Softline\Core\Logger\Log;
 use Softline\Core\Logger\Logger;
-use Softline\SiteStatusChecker;
+use Softline\DownDetector;
 
 require __DIR__ . '/../boot.php';
 
@@ -14,5 +14,5 @@ $logger->add(
 	Log::INFO,
 );
 
-$siteStatusChecker = new SiteStatusChecker($url);
+$siteStatusChecker = new DownDetector($url);
 $siteStatusChecker->run();

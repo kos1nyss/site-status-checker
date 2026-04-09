@@ -8,7 +8,7 @@ use Softline\Core\Logger\Logger;
 use Softline\Core\Message\MessagePublisher;
 use Softline\Core\Message\RoutingKey;
 
-class SiteStatusChecker
+class DownDetector
 {
 	private string $url;
 
