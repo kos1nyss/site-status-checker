@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Softline;
+namespace Kondrashov\DownDetector;
 
-use Softline\Core\Logger\Log;
-use Softline\Core\Logger\Logger;
-use Softline\Core\Message\MessageBroker;
+use Kondrashov\DownDetector\Core\Logger\Log;
+use Kondrashov\DownDetector\Core\Logger\Logger;
+use Kondrashov\DownDetector\Core\Message\MessageBroker;
 
 class Application
 {

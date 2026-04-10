@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Softline\Core\Http;
+namespace Kondrashov\DownDetector\Core\Http;
 
 class HttpClient
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Softline\Core\Logger;
+namespace Kondrashov\DownDetector\Core\Logger;
 
 enum Log: string
 {

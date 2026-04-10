@@ -1,12 +1,12 @@
 <?php
 
-namespace Softline;
+namespace Kondrashov\DownDetector;
 
 use PhpAmqpLib\Message\AMQPMessage;
-use Softline\Core\Logger\Log;
-use Softline\Core\Logger\Logger;
-use Softline\Core\Message\MessagePublisher;
-use Softline\Core\Message\RoutingKey;
+use Kondrashov\DownDetector\Core\Logger\Log;
+use Kondrashov\DownDetector\Core\Logger\Logger;
+use Kondrashov\DownDetector\Core\Message\MessagePublisher;
+use Kondrashov\DownDetector\Core\Message\RoutingKey;
 
 class DownDetector
 {

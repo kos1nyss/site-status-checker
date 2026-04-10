@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Softline\Core\Message;
+namespace Kondrashov\DownDetector\Core\Message;
 
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
-use Softline\Core\Logger\Log;
-use Softline\Core\Logger\Logger;
+use Kondrashov\DownDetector\Core\Logger\Log;
+use Kondrashov\DownDetector\Core\Logger\Logger;
 
 class MessageBroker
 {

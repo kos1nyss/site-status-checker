@@ -1,10 +1,10 @@
 <?php
 
-namespace Softline\Core\Mail;
+namespace Kondrashov\DownDetector\Core\Mail;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Softline\Core\Logger\Log;
-use Softline\Core\Logger\Logger;
+use Kondrashov\DownDetector\Core\Logger\Log;
+use Kondrashov\DownDetector\Core\Logger\Logger;
 
 class Mail
 {

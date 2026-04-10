@@ -2,7 +2,7 @@
 
 spl_autoload_register(function ($class)
 {
-	$prefix = 'Softline\\';
+	$prefix = 'Kondrashov\\DownDetector';
 	$base_dir = __DIR__ . '/lib/';
 	$len = strlen($prefix);
 	if (strncmp($prefix, $class, $len) !== 0) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Softline\Core\Message;
+namespace Kondrashov\DownDetector\Core\Message;
 
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;

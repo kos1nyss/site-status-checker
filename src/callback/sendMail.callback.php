@@ -3,11 +3,11 @@
 require __DIR__ . '/../boot.php';
 
 use PhpAmqpLib\Message\AMQPMessage;
-use Softline\Core\Logger\Log;
-use Softline\Core\Logger\Logger;
-use Softline\Core\Mail\Mail;
-use Softline\Core\Message\MessageConsumer;
-use Softline\Core\Message\RoutingKey;
+use Kondrashov\DownDetector\Core\Logger\Log;
+use Kondrashov\DownDetector\Core\Logger\Logger;
+use Kondrashov\DownDetector\Core\Mail\Mail;
+use Kondrashov\DownDetector\Core\Message\MessageConsumer;
+use Kondrashov\DownDetector\Core\Message\RoutingKey;
 
 $logger = new Logger();
 

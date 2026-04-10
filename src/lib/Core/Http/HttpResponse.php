@@ -1,6 +1,6 @@
 <?php
 
-namespace Softline\Core\Http;
+namespace Kondrashov\DownDetector\Core\Http;
 
 class HttpResponse
 {

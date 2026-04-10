@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Softline\Application;
+use Kondrashov\DownDetector\Application;
 
 require 'boot.php';
 
