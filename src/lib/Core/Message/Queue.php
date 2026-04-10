@@ -2,7 +2,7 @@
 
 namespace Kondrashov\DownDetector\Core\Message;
 
-enum RoutingKey: string
+enum Queue: string
 {
 	case SEND_MAIL = 'sendMail';
 }
