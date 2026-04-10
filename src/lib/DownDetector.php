@@ -2,11 +2,11 @@
 
 namespace Kondrashov\DownDetector;
 
+use Kondrashov\DownDetector\Core\Message\Queue;
 use PhpAmqpLib\Message\AMQPMessage;
 use Kondrashov\DownDetector\Core\Logger\Log;
 use Kondrashov\DownDetector\Core\Logger\Logger;
 use Kondrashov\DownDetector\Core\Message\MessagePublisher;
-use Kondrashov\DownDetector\Core\Message\RoutingKey;
 
 class DownDetector
 {
@@ -57,7 +57,7 @@ class DownDetector
 				];
 
 				$message = new AMQPMessage(json_encode($data, JSON_THROW_ON_ERROR));
-				$messagePublisher->publish($message, RoutingKey::SEND_MAIL->value);
+				$messagePublisher->publish($message, Queue::SEND_MAIL->value);
 			}
 		}
 

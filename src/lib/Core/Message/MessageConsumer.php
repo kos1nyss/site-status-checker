@@ -15,12 +15,12 @@ class MessageConsumer
 		$this->channel = $this->messageBroker->getChannel();
 	}
 
-	public function consume(\Closure $callback, RoutingKey $routingKey): void
+	public function consume(\Closure $callback, Queue $queue): void
 	{
 		$this
 			->channel
 			->basic_consume(
-				queue: $routingKey->value,
+				queue: $queue->value,
 				callback: $callback,
 			)
 		;

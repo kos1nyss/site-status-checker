@@ -58,10 +58,10 @@ class MessageBroker
 	{
 		$logger = new Logger();
 
-		foreach (RoutingKey::cases() as $routingKey)
+		foreach (Queue::cases() as $queue)
 		{
-			$this->declareQueue($routingKey->value);
-			$logger->add('Очередь ' . $routingKey->value . ' задекларирована.', Log::INFO);
+			$this->declareQueue($queue->value);
+			$logger->add('Очередь ' . $queue->value . ' задекларирована.', Log::INFO);
 		}
 
 		$callbacksDir = ROOT_DIR . '/src/callback';

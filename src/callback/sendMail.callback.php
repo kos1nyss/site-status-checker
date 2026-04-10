@@ -7,7 +7,7 @@ use Kondrashov\DownDetector\Core\Logger\Log;
 use Kondrashov\DownDetector\Core\Logger\Logger;
 use Kondrashov\DownDetector\Core\Mail\Mail;
 use Kondrashov\DownDetector\Core\Message\MessageConsumer;
-use Kondrashov\DownDetector\Core\Message\RoutingKey;
+use Kondrashov\DownDetector\Core\Message\Queue;
 
 $logger = new Logger();
 
@@ -38,4 +38,4 @@ $logger->add(
 
 
 $messageConsumer = new MessageConsumer();
-$messageConsumer->consume($callback, RoutingKey::SEND_MAIL);
+$messageConsumer->consume($callback, Queue::SEND_MAIL);
