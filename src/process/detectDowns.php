@@ -1,8 +1,8 @@
 <?php
 
-use Softline\Core\Logger\Log;
-use Softline\Core\Logger\Logger;
-use Softline\DownDetector;
+use Kondrashov\DownDetector\Core\Logger\Log;
+use Kondrashov\DownDetector\Core\Logger\Logger;
+use Kondrashov\DownDetector\DownDetector;
 
 require __DIR__ . '/../boot.php';
 
